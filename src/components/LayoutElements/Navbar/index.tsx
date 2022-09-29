@@ -1,4 +1,3 @@
-import { useEffect } from "react";
 import { useAuth } from "../../../context/AuthProvider/useAuth";
 import { getUserLocalStorage } from "../../../context/AuthProvider/util"
 
@@ -23,22 +22,26 @@ export const Navbar = () => {
                     <a className="nav-link active" href="login">Entrar</a>
                  </li>
                  }
-                 {(user && user.type !== 3 && user.type !== 4 && user.type !== 5) &&
+                 {(user && user.type !== "viewer") &&
                  <li className="nav-item dropdown">
                     <a className="nav-link dropdown-toggle active" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                     Cadastrar
                     </a>
                     <ul className="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                       <li><a className="dropdown-item" href="#">Atleta</a></li>
-                       <li><a className="dropdown-item" href="#">Àrbitro</a></li>
+                       <li><a className="dropdown-item" href="#">Cliente</a></li>
+                       <li><a className="dropdown-item" href="#">Venda</a></li>
+                       {user.type === "admin" &&
                        <li>
                           <hr className="dropdown-divider"/>
                        </li>
-                       <div>
-                        {user.type === 1 &&
-                       <li><a className="dropdown-item" href="#">Entidade</a></li>
                         }
-                       <li><a className="dropdown-item" href="#">Competição</a></li>
+                       <div>
+                        {user.type === "admin" &&
+                       <li><a className="dropdown-item" href="#">Funcionário</a></li>
+                        }
+                        {user.type === "admin" &&
+                       <li><a className="dropdown-item" href="#">Produto</a></li>
+                        }
                        </div>
                     </ul>
                  </li>
